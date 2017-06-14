@@ -1,0 +1,24 @@
+{
+    "name": "vertexvaar/zenphory",
+    "description": "Experimental PHP transpiler to \"compile\" static values into code",
+    "type": "project",
+    "require": {
+        "symfony/console": "^3.3",
+        "nikic/php-parser": "^3.0",
+        "symfony/var-dumper": "^3.3"
+    },
+    "license": "GPL-3",
+    "authors": [
+        {
+            "name": "Oliver Eglseder",
+            "email": "php@vxvr.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "VerteXVaaR\\Zenphory\\": "src"
+        }
+    }
+}
