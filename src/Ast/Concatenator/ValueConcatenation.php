@@ -3,7 +3,6 @@ declare(strict_types=1);
 namespace VerteXVaaR\Zenphory\Ast\Concatenator;
 
 use PhpParser\Node;
-use PhpParser\NodeAbstract;
 use PhpParser\NodeVisitorAbstract;
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -64,10 +63,23 @@ class ValueConcatenation extends NodeVisitorAbstract
 
     protected function concatStack($stack)
     {
-        VarDumper::dump($stack);
-        $initial = array_shift($stack);
-        $node = array_reduce($stack, [$this, 'reduceStack'], $initial);
-        return $node;
+        $nodeStack = [];
+        while (count($stack) > 1) {
+            $left = array_shift($stack);
+            $right = array_shift($stack);
+            $node = new Node\Expr\BinaryOp\Concat($left, $right);
+            $nodeStack[] = $node;
+        }
+        if (1 === count($stack)) {
+            $lastNode = end($nodeStack);
+            $index = key($nodeStack);
+            $nodeStack[$index] = new Node\Expr\BinaryOp\Concat($lastNode, array_shift($stack));
+        }
+
+        while (count($nodeStack) > 1) {
+            $nodeStack[] = new Node\Expr\BinaryOp\Concat(array_shift($nodeStack), array_shift($nodeStack));
+        }
+        return $nodeStack[0];
     }
 
     protected function reduceStack($carry, $item)
