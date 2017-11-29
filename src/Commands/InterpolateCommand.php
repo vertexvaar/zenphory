@@ -23,7 +23,7 @@ class InterpolateCommand extends Command
         }
         $target = __DIR__ . '/../../data/target/variables.php';
         $code = file_get_contents($source);
-        $codeBender = new \VerteXVaaR\Zenphory\Service\CodeBender($source);
+        $codeBender = new \VerteXVaaR\Zenphory\Service\CodeBender();
         $code = $codeBender->process($code);
         file_put_contents($target, $code);
     }
