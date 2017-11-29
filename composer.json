@@ -20,5 +20,8 @@
         "psr-4": {
             "VerteXVaaR\\Zenphory\\": "src"
         }
-    }
+    },
+    "bin": [
+        "bin/zenphory"
+    ]
 }
