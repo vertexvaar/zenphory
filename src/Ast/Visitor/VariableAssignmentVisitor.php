@@ -35,6 +35,17 @@ class VariableAssignmentVisitor extends NodeVisitorAbstract
                     $value = $node->expr->value;
                 } elseif ($node->expr instanceof Node\Expr\ConstFetch) {
                     $value = $node->expr;
+                } elseif ($node->expr instanceof Node\Expr\Array_) {
+                    $value = $node->expr->items;
+//                } elseif ($node->expr instanceof Node\Expr\ArrayDimFetch) {
+//                    $value = null;
+//                    if ($this->variableBag->has($node->expr->var->name)) {
+//                        $array = $this->variableBag->get($node->expr->var->name)->items;
+//                        $key = $node->expr->dim->value;
+//                        if (array_key_exists($key, $array)) {
+//                            $value = $array[$key]->value->value;
+//                        }
+//                    }
                 } else {
                     VarDumper::dump($node->expr);
                     throw new \Exception('Implement case for this node type');

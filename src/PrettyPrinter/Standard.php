@@ -8,6 +8,6 @@ class Standard extends \PhpParser\PrettyPrinter\Standard
 {
     protected function pMultinode(Multinode $multinode)
     {
-        return $return[] = $this->pStmts($multinode->nodes, false);
+        return $this->pStmts($multinode->nodes, false);
     }
 }

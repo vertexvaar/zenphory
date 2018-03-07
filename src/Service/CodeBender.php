@@ -4,7 +4,6 @@ namespace VerteXVaaR\Zenphory\Service;
 
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
-use Symfony\Component\VarDumper\VarDumper;
 use VerteXVaaR\Zenphory\Ast\Concatenator\ValueConcatenation;
 use VerteXVaaR\Zenphory\Ast\Interpolator\VariableInterpolator;
 use VerteXVaaR\Zenphory\Ast\Resolver\IfResolver;
@@ -45,12 +44,10 @@ class CodeBender
 
         do {
             $ast = $traverser->traverse($ast);
-        } while($valueConcatenation->flushChanged());
+        } while ($valueConcatenation->flushChanged());
 
         $prettyPrinter = new Standard();
         $code = $prettyPrinter->prettyPrintFile($ast) . PHP_EOL;
-
-        VarDumper::dump($variableBag);
 
         return $code;
     }

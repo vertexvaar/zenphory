@@ -14,7 +14,8 @@ class IdenticalResolver extends NodeVisitorAbstract
     public function enterNode(Node $node)
     {
         if ($node instanceof Node\Expr\BinaryOp\Identical) {
-            VarDumper::dump($node);die;
+            VarDumper::dump($node);
+            die;
             if ($node->left instanceof Node\Expr\ConstFetch && $node->right instanceof Node\Expr\ConstFetch) {
                 if ($node->left->name->toString() === $node->right->name->toString()) {
                     $this->replacements[spl_object_hash($node)] = $node;

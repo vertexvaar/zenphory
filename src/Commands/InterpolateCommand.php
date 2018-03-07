@@ -5,6 +5,7 @@ namespace VerteXVaaR\Zenphory\Commands;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use VerteXVaaR\Zenphory\Updated\Scanner;
 
 class InterpolateCommand extends Command
 {
@@ -17,14 +18,19 @@ class InterpolateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $source = __DIR__ . '/../../data/source/variables.php';
-        if (!file_exists(__DIR__ . '/../../data/target/')) {
-            mkdir(__DIR__ . '/../../data/target/');
-        }
-        $target = __DIR__ . '/../../data/target/variables.php';
-        $code = file_get_contents($source);
+        $scanner = new Scanner();
+        $files = $scanner->scanDirectoryRecursive(__DIR__ . '/../../data/source/');
         $codeBender = new \VerteXVaaR\Zenphory\Service\CodeBender();
-        $code = $codeBender->process($code);
-        file_put_contents($target, $code);
+
+        foreach ($files as $file) {
+            $target = __DIR__ . '/../../data/target/' . substr($file, strlen(__DIR__ . '/../../data/source/'));
+            $folder = dirname($target);
+            if (!file_exists($folder)) {
+                mkdir($folder);
+            }
+            $code = file_get_contents($file);
+            $code = $codeBender->process($code);
+            file_put_contents($target, $code);
+        }
     }
 }

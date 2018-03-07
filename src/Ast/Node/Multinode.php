@@ -8,11 +8,6 @@ class Multinode extends NodeAbstract
 {
     public $nodes = [];
 
-    /**
-     * Multinode constructor.
-     *
-     * @param array $nodes
-     */
     public function __construct(array $nodes, array $attributes = [])
     {
         parent::__construct($attributes);

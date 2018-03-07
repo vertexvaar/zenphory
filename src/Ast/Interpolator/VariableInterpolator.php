@@ -29,12 +29,17 @@ class VariableInterpolator extends NodeVisitorAbstract
 
     public function enterNode(Node $node)
     {
+        //        if ($node instanceof Node\Expr\Assign && $node->expr instanceof Node\Expr\ArrayDimFetch) {
+        //            if ($this->variableBag->has($node->var->name)) {
+        //                return $this->variableBag->get($node->var->name);
+        //            }
+        //        } else
         if ($node instanceof Node\Expr\Assign) {
             $this->assignmentLevel++;
         } elseif ($node instanceof Node\Expr\Variable
-            && $this->assignmentLevel === 0
-            && $this->safeToReplace
-            && $this->variableBag->has($node->name)
+                  && $this->assignmentLevel === 0
+                  && $this->safeToReplace
+                  && $this->variableBag->has($node->name)
         ) {
             return $this->variableBag->get($node->name);
         }

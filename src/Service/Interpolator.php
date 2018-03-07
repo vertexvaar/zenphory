@@ -146,9 +146,8 @@ class Interpolator
             VarDumper::dump($ast);
             throw new \Exception('AST is not an array, buaaah');
         }
-        foreach ($ast as $inndx => $item) {
-            if (false) {
-            } elseif ($item instanceof Variable) {
+        foreach ($ast as $index => $item) {
+            if ($item instanceof Variable) {
                 $name = $this->extractName($item);
                 if (isset($variables[$name])) {
                     $value = $variables[$name];
@@ -171,7 +170,7 @@ class Interpolator
                             VarDumper::dump([gettype($value), $value]);
                             throw new \Exception('Missing type returner');
                     }
-                    $ast[$inndx] = $newType;
+                    $ast[$index] = $newType;
                 }
             } elseif ($item instanceof Declare_) {
             } elseif ($item instanceof Name) {

@@ -4,7 +4,6 @@ namespace VerteXVaaR\Zenphory\Ast\Concatenator;
 
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
-use Symfony\Component\VarDumper\VarDumper;
 
 class ValueConcatenation extends NodeVisitorAbstract
 {
@@ -58,7 +57,8 @@ class ValueConcatenation extends NodeVisitorAbstract
     protected function isScalarWithValue(Node $node)
     {
         return $node instanceof Node\Scalar\String_
-            || $node instanceof Node\Scalar\LNumber;
+               || $node instanceof Node\Scalar\LNumber
+               || $node instanceof Node\Scalar\DNumber;
     }
 
     protected function concatStack($stack)

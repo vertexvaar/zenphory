@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace VerteXVaaR\Zenphory\Bag;
 
+use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
@@ -29,6 +30,9 @@ class VariableBag
                     break;
                 case 'integer':
                     $value = new LNumber($value);
+                    break;
+                case 'array':
+                    $value = new Array_($value);
                     break;
                 default:
                     VarDumper::dump([gettype($value) => $value]);

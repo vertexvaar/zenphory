@@ -4,7 +4,6 @@ namespace VerteXVaaR\Zenphory\Ast\Resolver;
 
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
-use Symfony\Component\VarDumper\VarDumper;
 use VerteXVaaR\Zenphory\Ast\Node\Multinode;
 
 class IfResolver extends NodeVisitorAbstract
@@ -13,7 +12,9 @@ class IfResolver extends NodeVisitorAbstract
     {
         if ($node instanceof Node\Stmt\If_) {
             if ($node->cond instanceof Node\Expr\BinaryOp) {
-                if ($node->cond->left instanceof Node\Expr\ConstFetch && $node->cond->right instanceof Node\Expr\ConstFetch) {
+                if ($node->cond->left instanceof Node\Expr\ConstFetch
+                    && $node->cond->right instanceof Node\Expr\ConstFetch
+                ) {
                     if ($node->cond->left->name->toString() === $node->cond->right->name->toString()) {
                         return new Multinode($node->stmts);
                     }
