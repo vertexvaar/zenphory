@@ -26,7 +26,7 @@ class InterpolateCommand extends Command
             $target = __DIR__ . '/../../data/target/' . substr($file, strlen(__DIR__ . '/../../data/source/'));
             $folder = dirname($target);
             if (!file_exists($folder)) {
-                mkdir($folder);
+                mkdir($folder, 0775, true);
             }
             $code = file_get_contents($file);
             $code = $codeBender->process($code);
