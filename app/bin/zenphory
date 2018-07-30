@@ -4,4 +4,5 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 require_once(__DIR__ . '/../settings.php');
 $app = new \Symfony\Component\Console\Application('Zenphory', '1.0.0');
 $app->add(new \VerteXVaaR\Zenphory\Commands\InterpolateCommand());
+$app->add(new \VerteXVaaR\Zenphory\Commands\PrintCommand());
 $app->run();
