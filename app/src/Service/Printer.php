@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-
 namespace VerteXVaaR\Zenphory\Service;
 
 use PhpParser\ParserFactory;
@@ -14,7 +13,7 @@ class Printer
     public function all()
     {
         $scanner = new Scanner();
-        $files = $scanner->scanDirectoryRecursive(__DIR__ . '/../../data/source/');
+        $files = $scanner->scanDirectoryRecursive(__DIR__ . '/../../data/fixtures/');
 
         foreach ($files as $file) {
             $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
@@ -22,7 +21,7 @@ class Printer
 
             echo $file . PHP_EOL;
 
-            var_export($node);
+            var_dump($node);
         }
     }
 }
