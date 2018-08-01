@@ -15,4 +15,11 @@ ini_set('xdebug.var_display_max_data', '-1');
 
 echo '<pre>';
 $printer = new \VerteXVaaR\Zenphory\Service\Printer();
-$printer->all();
+$node = $printer->all();
+
+if (null !== $node) {
+    $collector = new \VerteXVaaR\Zenphory\Updated\Proccer();
+    $traverser = new \PhpParser\NodeTraverser();
+    $traverser->addVisitor($collector);
+    $traverser->traverse($node);
+}
