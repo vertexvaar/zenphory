@@ -4,6 +4,7 @@ services:
     image: webdevops/php-nginx-dev:7.2
     volumes:
       - ./app/:/app/
+      - /home/oeglseder/.cache/composer/:/home/application/.composer/cache/
     environment:
       VIRTUAL_PORT: 80
       WEB_DOCUMENT_ROOT: /app/public

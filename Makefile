@@ -16,3 +16,6 @@ interpolate:
 
 print:
 	docker-compose exec -u application app /app/bin/zenphory print
+
+logs:
+	docker-compose logs -f

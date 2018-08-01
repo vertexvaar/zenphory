@@ -1,5 +1,8 @@
 <?php
 declare(strict_types=1);
+if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    die('composer install first');
+}
 require_once(__DIR__ . '/../vendor/autoload.php');
 
 error_reporting(E_ALL);
